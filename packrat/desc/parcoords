@@ -1,0 +1,39 @@
+Package: parcoords
+Title: htmlwidget for d3.js parallel coordinates chart
+Version: 0.2.1
+Authors@R: c( person("Mike", "Bostock", role = c("aut", "cph"), comment =
+    "d3.js library in htmlwidgets/lib, http://d3js.org"), person("Kai", "Chang"
+    ,role = c( "aut","cph" ), comment = "parallel coordinates reusable chart,
+    https://github.com/syntagmatic/parallel-coordinates"),
+    person("Kenton","Russell", role = c("aut","cre"), comment = "R interface",
+    email = "kent.russell@timelyportfolio.com"),
+    person("Mark","Albrecht",role = c("ctb"),comment = "Shiny output and example",
+    email="malbrech@nmdp.org"))
+Maintainer: Kenton Russell <kent.russell@timelyportfolio.com>
+Description: Create interactive parallel coordinates charts with this htmlwidget
+    wrapper for d3.js \href{http://syntagmatic.github.io/parallel-coordinates/}
+    {parallel-coordinates}.
+Depends: R (>= 3.1.2)
+License: MIT + file LICENSE
+LazyData: true
+Imports: htmlwidgets (>= 0.3.2)
+Suggests: knitr, testthat
+VignetteBuilder: knitr
+RoxygenNote: 4.1.1.9001
+Author: Mike Bostock [aut, cph] (d3.js library in htmlwidgets/lib,
+    http://d3js.org),
+  Kai Chang [aut, cph] (parallel coordinates reusable chart,
+    https://github.com/syntagmatic/parallel-coordinates),
+  Kenton Russell [aut, cre] (R interface),
+  Mark Albrecht [ctb] (Shiny output and example)
+Built: R 3.3.0; ; 2016-05-04 21:29:47 UTC; unix
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: parcoords
+RemoteUsername: timelyportfolio
+RemoteRef: master
+RemoteSha: aefd83354446a8dabc7fdb83852c5b5ece5a7760
+GithubRepo: parcoords
+GithubUsername: timelyportfolio
+GithubRef: master
+GithubSHA1: aefd83354446a8dabc7fdb83852c5b5ece5a7760

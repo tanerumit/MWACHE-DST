@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</head>
+<body>
+<p>
+    <strong>Water resources system model</strong>
+</p>
+<p>
+    <strong> </strong>
+</p>
+<p>
+    <em>General approach</em>
+</p>
+<p>
+    The Mwache water resources system is modeled as a node-link network, a common approach used in the catchment-scale river basin simulation of and analysis
+    (McKinney 1999; Rosegrant 2000; Cai et al., 2006). The model is coded in the R statistical computing environment.
+</p>
+<p>
+    The model consists of a set of nodes and links, in which nodes represent physical features in the system such as rivers, reservoirs, streamflow gages or
+    demand sites; and links represent connections between the nodes, for example a diversion channel from the river to an irrigation site (Figure 1).
+</p>
+<p align="center">
+    <img width="254" height="146" src="watershed.png"/>
+</p>
+<p align="center">
+    Figure 1 - <strong>Mwache water resources system</strong>
+</p>
+<p>
+The aim of the model is to consistently simulate water flow and mass balance in the system, and compute <em>instream </em>and <em>off-stream</em> uses based on the physical and policy constraints. Mass balance is conserved at each node in the system, which states that at any given time period \(t\), the total inflow (\(Q_t\)) is equal to the sum of total outflow (\(R_t\)), net change in storage \(\Delta S_t\), and losses (\(L_t\)).
+</p>
+<p>
+\begin{equation}
+  Q_t = R_t + \Delta S_t + L_t
+  \label{eq:inflow}
+\end{equation}
+</p>
+<p>
+Additional equations to \eqref{eq:inflow} are introduced to meet the node specific requirements, for example the flows to the demand sites are constrained by their supply requirements, and flows from the reservoirs are constrained by the operating policy etc.
+</p>
+<p>
+    <em>Reservoir operations</em>
+</p>
+<p>
+A reservoir's operating rules determine how much water is available in a given month for release, to satisfy <em>off-stream</em> demand and    <em>instream</em> flow requirements. Reservoir operating rules are defined based on the following assumptions.
+</p>
+<p>
+    Total storage of the reservoir is divided into four pools from top to down that are flood-control, conservation, buffer, and inactive respectively (Figure
+    2).
+</p>
+<p align="center">
+    <img width="254" height="146" src="zones.png"/>
+</p>
+<p align="center">
+    Figure 2 - Illustration of reservoir storage pools
+</p>
+<p>
+Water available for release at any given period is given by the total amount of water in the flood-control and conservation pools, plus a fraction of the water in the buffer pool (2). The fraction of water available for release from the buffer pool is determined by the buffer coefficient (\(\beta\)). The buffer coefficient is a dimensionless number from 0 to 1. Once the storage level in the reservoir drops into the buffer pool, the release at that month will be restricted according to \(\beta\), in order to conserve a fraction of the water supply for the future.
+</p>
+<p>
+For example, a larger value for \(\beta\) (closer to 1) will cause downstream demands to be met more fully at that given period; whereas a lower value of \(\beta\) (closer to 0) will preserve more water for the subsequent period(s).
+</p>
+<p>
+\begin{equation}
+  {Pool} = {Pool}_{Flood-control} + {Pool}_{Conservation} + {Pool}_{Buffer} * \beta
+  \label{eq:pool}
+\end{equation}
+</p>
+<p>
+    The final storage volume in period t, \(S_{t+1})\), will equal the initial volume, \(S_t\), plus total inflows \(Q_t\), total releases \(R_t\), and evaporation and seepage losses \(L_t\).
+</p>
+<p>
+\begin{equation}
+  S_{t+1} = S_t + Q_t - R_t - L_t, \qquad \forall t
+  \label{eq:storagevol}
+\end{equation}
+</p>
+<p>
+\(R_t\) is constrained by the storage pool available for releases at period t, \({Pool}_t\):
+</p>
+<p>
+\begin{equation}
+  R_t \leq {Pool}_t
+  \label{eq:releases}
+\end{equation}
+</p>
+<p>
+    <em>Prioritization of water uses</em>
+</p>
+<p>
+    <em> </em>
+</p>
+<p>
+Releases at a given time period, \(R_t\) is the summation of environmental, domestic and irrigation releases and spills (if any). Water allocation to environmental, domestic, and irrigation uses are implemented by a simple prioritization rule, in which at a given period, the demand site with priority 1 is allocated water before the second priority. For example, when the priority order is specified as environmental, domestic, and irrigation, no water is supplied for the domestic use until the specified environmental release requirement is fully met. Similarly, no water is allocated to irrigation use before all the demand from environmental and domestic uses are met.
+</p>
+</body>
+</html>
